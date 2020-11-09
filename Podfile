@@ -7,4 +7,7 @@ target 'ChatExample' do
 
   pod 'Chatto'
   pod 'ChattoAdditions'
+  pod 'WCDB.swift'
+  pod 'AgoraRtm_iOS'
+
 end

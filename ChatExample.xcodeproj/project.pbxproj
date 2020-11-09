@@ -30,6 +30,10 @@
 		72BF1BD025597376001C65BC /* ReplyActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF1BBE25597375001C65BC /* ReplyActionHandler.swift */; };
 		72BF1BD125597376001C65BC /* SendingStatusCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF1BC025597375001C65BC /* SendingStatusCollectionViewCell.swift */; };
 		72BF1BD225597376001C65BC /* SendingStatusCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72BF1BC125597375001C65BC /* SendingStatusCollectionViewCell.xib */; };
+		72BF1BE42559749B001C65BC /* Beehive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF1BE32559749B001C65BC /* Beehive.swift */; };
+		72BF1BE7255975FF001C65BC /* HiveRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF1BE6255975FF001C65BC /* HiveRoom.swift */; };
+		72BF1BF925598378001C65BC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF1BF825598378001C65BC /* Message.swift */; };
+		72BF1BFE25598CD0001C65BC /* DBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF1BFD25598CD0001C65BC /* DBUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +63,10 @@
 		72BF1BBE25597375001C65BC /* ReplyActionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyActionHandler.swift; sourceTree = "<group>"; };
 		72BF1BC025597375001C65BC /* SendingStatusCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendingStatusCollectionViewCell.swift; sourceTree = "<group>"; };
 		72BF1BC125597375001C65BC /* SendingStatusCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendingStatusCollectionViewCell.xib; sourceTree = "<group>"; };
+		72BF1BE32559749B001C65BC /* Beehive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beehive.swift; sourceTree = "<group>"; };
+		72BF1BE6255975FF001C65BC /* HiveRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiveRoom.swift; sourceTree = "<group>"; };
+		72BF1BF825598378001C65BC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		72BF1BFD25598CD0001C65BC /* DBUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBUser.swift; sourceTree = "<group>"; };
 		C344C715F6A1A2FC2E0A7DE0 /* Pods-ChatExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatExample.debug.xcconfig"; path = "Target Support Files/Pods-ChatExample/Pods-ChatExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,6 +223,10 @@
 		72BF1BC225597375001C65BC /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				72BF1BE32559749B001C65BC /* Beehive.swift */,
+				72BF1BE6255975FF001C65BC /* HiveRoom.swift */,
+				72BF1BFD25598CD0001C65BC /* DBUser.swift */,
+				72BF1BF825598378001C65BC /* Message.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -340,6 +352,7 @@
 				72164A8D255828F100D16117 /* AppDelegate.swift in Sources */,
 				72BF1BC625597375001C65BC /* SendingStatusModel.swift in Sources */,
 				72BF1BD025597376001C65BC /* ReplyActionHandler.swift in Sources */,
+				72BF1BE42559749B001C65BC /* Beehive.swift in Sources */,
 				72BF1BCC25597375001C65BC /* BaseMessagesSelector.swift in Sources */,
 				72BF1BC825597375001C65BC /* ChatTextMessageModel.swift in Sources */,
 				72BF1BC725597375001C65BC /* TimeSeparatorModel.swift in Sources */,
@@ -348,8 +361,11 @@
 				72BF1BD125597376001C65BC /* SendingStatusCollectionViewCell.swift in Sources */,
 				72BF1BC925597375001C65BC /* ChatTextMessageViewModelBuilder.swift in Sources */,
 				72BF1BCD25597375001C65BC /* ChatViewController.swift in Sources */,
+				72BF1BE7255975FF001C65BC /* HiveRoom.swift in Sources */,
+				72BF1BFE25598CD0001C65BC /* DBUser.swift in Sources */,
 				72BF1BCE25597376001C65BC /* ChatItemsDecorator.swift in Sources */,
 				72BF1BCA25597375001C65BC /* BaseMessageCollectionViewCellAvatarStyle.swift in Sources */,
+				72BF1BF925598378001C65BC /* Message.swift in Sources */,
 				72BF1BC325597375001C65BC /* SlidingDataSource.swift in Sources */,
 				72BF1BC425597375001C65BC /* ChatDataSource.swift in Sources */,
 			);
