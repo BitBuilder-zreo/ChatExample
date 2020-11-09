@@ -20,9 +20,13 @@ class ViewController: UIViewController {
 fileprivate extension ViewController  {
     
     @IBAction func addUser(){
-        
+
+        let factory = ChatMessageFactory(1)
+
         let chat = ChatViewController()
-        
+
+        chat.dataSource = ChatDataSource(factory: factory, count: 1, pageSize: 50)
+
         navigationController?.pushViewController(chat, animated: true)
         
     }
