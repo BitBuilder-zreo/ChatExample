@@ -53,6 +53,6 @@ public class ChatTextMessageViewModelBuilder: ViewModelBuilderProtocol {
     }
 
     public func canCreateViewModel(fromModel model: Any) -> Bool {
-        return model is ChatTextMessageViewModel
+        return model is ChatTextMessageModel
     }
 }

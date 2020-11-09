@@ -43,8 +43,7 @@ class ChatViewController: BaseChatViewController {
 
         let textMessagePresenter = TextMessagePresenterBuilder(
             viewModelBuilder: ChatTextMessageViewModelBuilder(),
-            interactionHandler: ChatMessageInteractionHandler(
-                messageSender: messageSender,
+            interactionHandler: ChatMessageInteractionHandler(messageSender: messageSender,
                 messagesSelector: messagesSelector)
         )
 

@@ -88,7 +88,6 @@ final class ChatItemsDecorator: ChatItemsDecoratorProtocol {
 
     private func separationAfterItem(_ current: ChatItemProtocol?, next: ChatItemProtocol?) -> CGFloat {
 
-        return 300
         guard let nexItem = next else { return 0 }
         guard let currentMessage = current as? MessageModelProtocol else { return Constants.normalSeparation }
         guard let nextMessage = nexItem as? MessageModelProtocol else { return Constants.normalSeparation }
