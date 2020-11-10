@@ -10,8 +10,6 @@ import Chatto
 
 class ChatDataSource {
 
-    var nextMessageId: Int = 0
-
     let preferredMaxWindowSize = 500
 
     /// 数据源代理
@@ -31,16 +29,13 @@ class ChatDataSource {
 
     let factory:ChatMessageFactory!
 
-    init(factory:ChatMessageFactory,count:Int,pageSize:Int) {
+    init(factory:ChatMessageFactory,pageSize:Int) {
+
         self.factory = factory
-        self.slidingWindow = SlidingDataSource(count: count, pageSize: pageSize, itemGenerator: { [weak self]() -> ChatItemProtocol in
 
-            guard let sSelf = self else { return factory.makeRandomMessage("") }
+        let items:[ChatItemProtocol] = factory.makeRandomMessage()
 
-            defer { sSelf.nextMessageId += 1 }
-
-            return factory.makeRandomMessage(String(sSelf.nextMessageId))
-        })
+        self.slidingWindow = SlidingDataSource(items: items, pageSize: 50)
     }
 }
 
@@ -65,7 +60,6 @@ extension ChatDataSource : ChatDataSourceProtocol{
         slidingWindow.loadNext()
         slidingWindow.adjustWindow(focusPosition: 1, maxWindowSize: preferredMaxWindowSize)
         delegate?.chatDataSourceDidUpdate(self, updateType: .pagination)
-        
     }
     
     func loadPrevious() {
@@ -87,9 +81,7 @@ extension ChatDataSource {
 
     func addTextMessage(_ text:String)  {
 
-        let uid = "\(self.nextMessageId)"
-        self.nextMessageId += 1
-        let message = factory.makeTextMessage(uid, text: text, isIncoming: false)
+        let message = factory.makeTextMessage(text)
         self.messageSender.sendMessage(message)
         self.slidingWindow.insertItem(message, position: .bottom)
         self.delegate?.chatDataSourceDidUpdate(self)

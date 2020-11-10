@@ -1,8 +1,19 @@
 PODS:
   - AgoraRtm_iOS (1.4.1)
+  - Alamofire (5.4.0)
   - Chatto (4.0.0)
   - ChattoAdditions (4.0.0):
     - Chatto (= 4.0.0)
+  - Moya (14.0.0):
+    - Moya/Core (= 14.0.0)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
   - SQLiteRepairKit (1.2.2):
     - WCDBOptimizedSQLCipher (~> 1.2.0)
   - WCDB.swift (1.0.8.2):
@@ -14,25 +25,38 @@ DEPENDENCIES:
   - AgoraRtm_iOS
   - Chatto
   - ChattoAdditions
+  - Moya
+  - RxCocoa
+  - RxSwift
   - WCDB.swift
 
 SPEC REPOS:
   trunk:
     - AgoraRtm_iOS
+    - Alamofire
     - Chatto
     - ChattoAdditions
+    - Moya
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SQLiteRepairKit
     - WCDB.swift
     - WCDBOptimizedSQLCipher
 
 SPEC CHECKSUMS:
   AgoraRtm_iOS: 3a5b675487b39e51f416e8c8a040f97f0aaad2c1
+  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Chatto: 970c3546b01acdca60a7ba6de13cc73f62341fa7
   ChattoAdditions: a8489889474f2a5bd2055089caeebf663cba34e3
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
   WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: 192eeff3ab006b211e5d03870a5cca47e51564c9
+PODFILE CHECKSUM: a01681d15cab014d27526f08c1c057d33a1634d1
 
 COCOAPODS: 1.9.3

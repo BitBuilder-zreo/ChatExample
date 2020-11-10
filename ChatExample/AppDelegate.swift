@@ -10,11 +10,9 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        Beehive.default.connection(with: "5b29d2e35ebb49d28cd94d594e738892")
+        Beehive.default.connection(with: "fd8b88f4213e4b0a81a00e01cf4abf17")
         return true
     }
 

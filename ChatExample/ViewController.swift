@@ -13,7 +13,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         /// 登录
-        Beehive.default.login(id: "10010")
+        Beehive.default.login(
+            with: "006fd8b88f4213e4b0a81a00e01cf4abf17IAABcD0bydUpa0wbJmsA6M5K0cCpd/u6ZeRbUGMgpkjf23cVWtYAAAAAEABYEQEAKoWrXwEA6AMqhatf",
+            id: "11")
         // Do any additional setup after loading the view.
     }
 
@@ -21,16 +23,16 @@ class ViewController: UIViewController {
 }
 
 fileprivate extension ViewController  {
-    
+   // http://showdoc.yangxiushan.top/web/#/15?page_id=227
     @IBAction func addUser(){
 
-//        let factory = ChatMessageFactory(1)
-//
-//        let chat = ChatViewController()
-//
-//        chat.dataSource = ChatDataSource(factory: factory, count: 1, pageSize: 50)
-//
-//        navigationController?.pushViewController(chat, animated: true)
+        let factory = Beehive.default.items.first!
+
+        let chat = ChatViewController()
+
+        chat.dataSource = ChatDataSource(factory: factory,pageSize: 50)
+
+        navigationController?.pushViewController(chat, animated: true)
         
     }
     

@@ -12,6 +12,11 @@ class DBUser : TableCodable {
     
     /// 另一个用户的ID
     let toUser:Int
+
+    init(_ toUser:Int) {
+        self.toUser = toUser
+    }
+
     
     enum CodingKeys:String,CodingTableKey {
         

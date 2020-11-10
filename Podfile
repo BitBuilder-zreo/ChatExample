@@ -9,5 +9,7 @@ target 'ChatExample' do
   pod 'ChattoAdditions'
   pod 'WCDB.swift'
   pod 'AgoraRtm_iOS'
-
+  pod 'Moya'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 end

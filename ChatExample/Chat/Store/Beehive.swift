@@ -14,7 +14,7 @@ class Beehive : NSObject {
     
     var chat : AgoraRtmKit?
     
-    fileprivate var hive:HiveRoom!
+    fileprivate(set) var hive:HiveRoom!
     
     lazy var items:[ChatMessageFactory] =  {
         
