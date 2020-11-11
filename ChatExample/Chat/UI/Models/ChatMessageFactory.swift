@@ -10,24 +10,16 @@ import Chatto
 import ChattoAdditions
 import WCDBSwift
 class ChatMessageFactory {
-    
-    fileprivate weak var database:Database?
-    
+
     let toUser:Int
 
     var items:[Message]
 
-    init(_ database:Database = Beehive.default.hive.database,toUser:Int) {
-        self.database = database
+    init(toUser:Int) {
+
         self.toUser = toUser
 
-        do {
-            items = try database.getObjects(fromTable: "Message", where: toUser == Message.Properties.toUser)
-
-        } catch  {
-            items = []
-            print("获取数据失败")
-        }
+        items = Beehive.allMessage(toUser: toUser)
     }
 
     func makeRandomMessage() -> [MessageModelProtocol]  {
@@ -37,16 +29,11 @@ class ChatMessageFactory {
 
     func makeTextMessage(_ text:String) -> ChatMessageModelProtocol  {
 
-        let user = DBUser(toUser)
-        try? database?.insert(objects: user, intoTable: "User")
+        Beehive.insertOrUpdate(DBUser(toUser))
 
         let message = Message(toUser: toUser, status: 1, type: 1, isSender: true)
 
-        try? database?.insert(objects: message, intoTable: "Message")
-
-        let content = Message.TextContent(uid: 0, content: text)
-
-        try? database?.insert(objects: content, intoTable: "Text")
+        Beehive.insert(message: message, text: text)
 
         let messageModel = ChatMessageFactory.makeMessageModel(message)
 
@@ -63,14 +50,7 @@ fileprivate extension ChatMessageFactory {
 
         switch message.type {
         case 1:
-            let text:String
-            do {
-
-                let content:Message.TextContent? = try database?.getObject(fromTable: "Text", where: message.identifier ?? 0 == Message.TextContent.Properties.uid)
-                text = content?.content ?? ""
-            } catch  {
-                text = ""
-            }
+            let text = Beehive.makeTextRandomMessage(message: message)
 
             let messageModel = ChatMessageFactory.makeMessageModel(message)
 

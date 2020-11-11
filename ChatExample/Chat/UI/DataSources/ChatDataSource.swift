@@ -85,7 +85,6 @@ extension ChatDataSource {
         self.messageSender.sendMessage(message)
         self.slidingWindow.insertItem(message, position: .bottom)
         self.delegate?.chatDataSourceDidUpdate(self)
-
         delegate?.chatDataSourceDidUpdate(self)
     }
 

@@ -31,8 +31,34 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ShC-1W-Arf">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="IRk-d1-QjI">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IRk-d1-QjI" id="Kkz-6N-GjN">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="ho9-u8-NNr"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="VwE-M5-Th3"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ShC-1W-Arf" secondAttribute="trailing" id="APY-hU-Kep"/>
+                            <constraint firstItem="ShC-1W-Arf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QDO-Zy-Qcw"/>
+                            <constraint firstItem="ShC-1W-Arf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XZC-Ia-yrW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ShC-1W-Arf" secondAttribute="bottom" id="hiv-eO-KLJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MEM-jb-y2j">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HzU-PJ-gFN">
@@ -41,10 +67,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="ShC-1W-Arf" id="oc2-hm-kaf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-83" y="17"/>
+            <point key="canvasLocation" x="-81" y="26"/>
         </scene>
     </scenes>
     <resources>

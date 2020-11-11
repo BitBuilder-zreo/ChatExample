@@ -12,15 +12,10 @@ class Beehive : NSObject {
     
     private static let instance = Beehive()
     
-    var chat : AgoraRtmKit?
+    private var chat : AgoraRtmKit?
     
-    fileprivate(set) var hive:HiveRoom!
-    
-    lazy var items:[ChatMessageFactory] =  {
-        
-        return hive.allUser().map{ ChatMessageFactory(hive.database, toUser: $0.toUser) }
-    }()
-    
+    private var hive:HiveRoom!
+
     class var `default`: Beehive{
         return instance
     }
@@ -36,8 +31,8 @@ extension Beehive {
     
     /// 登录声网
     /// - Parameter appid: 声网创建的appid
-    func connection(with appid:String)  {
-        self.chat = AgoraRtmKit(appId:appid , delegate: self)
+    class func connection(with appid:String)  {
+        Beehive.default.chat = AgoraRtmKit(appId:appid , delegate: Beehive.default)
     }
     
     /// 用户登录
@@ -46,14 +41,14 @@ extension Beehive {
     ///   - id: 用户ID
     ///   - completion: 登录回调
     /// - Returns:
-    func login(with token:String? = nil ,id:String,completion:((AgoraRtmLoginErrorCode)->())? = nil)  {
-        chat?.login(byToken: token, user: id, completion: completion)
+    class func login(with token:String? = nil ,id:String,completion:((AgoraRtmLoginErrorCode)->())? = nil)  {
+        Beehive.default.chat?.login(byToken: token, user: id, completion: completion)
     }
     
     /// 退出登录
-    func logout(with completion:((AgoraRtmLogoutErrorCode)->())? = nil)  {
+    class func logout(with completion:((AgoraRtmLogoutErrorCode)->())? = nil)  {
         
-        chat?.logout(completion: completion)
+        Beehive.default.chat?.logout(completion: completion)
     }
     
 }
@@ -81,19 +76,37 @@ extension Beehive : AgoraRtmDelegate {
     
     func rtmKit(_ kit: AgoraRtmKit, messageReceived message: AgoraRtmMessage, fromPeer peerId: String) {
         
-        hive.allUser()
-        
-        
-        if items.contains(where: { String($0.toUser) == peerId }) {
-            
-            items.forEach{
-                $0.update()
-            }
-        }else {
-            items = hive.allUser().map{ ChatMessageFactory(hive.database, toUser: $0.toUser) }
-        }
+
     }
     
 }
 
 
+extension Beehive {
+
+    class var items:[ChatMessageFactory]{
+
+        return Beehive.default.hive.allUser().map { ChatMessageFactory(toUser: $0.toUser) }
+    }
+
+    class func allMessage(toUser:Int) ->[Message] {
+
+        return Beehive.default.hive.allMessage(toUser: toUser)
+    }
+
+    class func insertOrUpdate(_ user:DBUser) {
+
+        return Beehive.default.hive.insertOrUpdate(user)
+    }
+
+    class func insert(message:Message,text:String) {
+
+        return Beehive.default.hive.insert(message: message, text: text)
+    }
+
+    class func makeTextRandomMessage(message:Message) -> String {
+
+        return Beehive.default.hive.makeTextRandomMessage(message: message)
+    }
+
+}
