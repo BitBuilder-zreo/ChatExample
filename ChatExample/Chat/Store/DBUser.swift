@@ -11,11 +11,11 @@ import WCDBSwift
 class DBUser : TableCodable {
     
     /// 另一个用户的ID
-    let toUser:Int
+    let toUser:String
     /// 更新时间
     let latest:Date
 
-    init(_ toUser:Int,
+    init(_ toUser:String,
          _ latest:Date = Date()) {
         self.toUser = toUser
         self.latest = latest

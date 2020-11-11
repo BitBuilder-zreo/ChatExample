@@ -11,11 +11,11 @@ import ChattoAdditions
 import WCDBSwift
 class ChatMessageFactory {
 
-    let toUser:Int
+    let toUser:String
 
     var items:[Message]
 
-    init(toUser:Int) {
+    init(toUser:String) {
 
         self.toUser = toUser
 

@@ -6,13 +6,17 @@
 //
 
 import UIKit
-
+import Moya
+import RxSwift
+import RxCocoa
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView:UITableView!
 
     var items: [ChatMessageFactory] = []
-
+    
+    let bag = DisposeBag()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.items = Beehive.items
@@ -21,11 +25,24 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.visibleCells
-        /// 登录
-        Beehive.login(
-            with: "006fd8b88f4213e4b0a81a00e01cf4abf17IAABcD0bydUpa0wbJmsA6M5K0cCpd/u6ZeRbUGMgpkjf23cVWtYAAAAAEABYEQEAKoWrXwEA6AMqhatf",
-            id: "11")
+        
+//        "token": "rP023ZJt9d0NkUks5dTxkveQgAo6En1U",
+//                  "avatar": "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI2ypuOuCibDFf8xy6ktq5wZM2iamlkibbib0tv78hoicbdL7XsZMXasiaRvTApuzvHGo64qZcCiavicTiaoyw/132",
+//                  "nickname": "用户C8GSZQ"
+        
+        let provider : MoyaProvider<Api> = MoyaProvider()
+        
+        provider.rx.request(.token)
+            .filterSuccessfulStatusCodes()
+            .map(Respose<RTMUser>.self).subscribe { [weak self](response) in
+            
+                if let user = response.data { self?.login(user: user) }
+            } onError: { (error) in
+                
+            }.disposed(by: bag)
+
+        
+    
         // Do any additional setup after loading the view.
     }
 
@@ -34,9 +51,19 @@ class ViewController: UIViewController {
 
 fileprivate extension ViewController  {
    // http://showdoc.yangxiushan.top/web/#/15?page_id=227
+    
+    func login(user:RTMUser) {
+        
+        /// 登录
+        Beehive.login(
+            with:user.token,
+            id: user.u_id)
+    }
+    
+    
     @IBAction func addUser(){
 
-        let factory = ChatMessageFactory(toUser: 15)
+        let factory = ChatMessageFactory(toUser: "14")
 
         let chat = ChatViewController()
 
@@ -50,10 +77,7 @@ fileprivate extension ViewController  {
 
 extension ViewController : UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return items.count
-    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return items.count }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -63,6 +87,7 @@ extension ViewController : UITableViewDataSource {
 
         return cell
     }
+    
 }
 
 extension ViewController : UITableViewDelegate {

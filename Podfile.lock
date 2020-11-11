@@ -8,6 +8,9 @@ PODS:
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
+  - Moya/RxSwift (14.0.0):
+    - Moya/Core
+    - RxSwift (~> 5.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -26,6 +29,7 @@ DEPENDENCIES:
   - Chatto
   - ChattoAdditions
   - Moya
+  - Moya/RxSwift
   - RxCocoa
   - RxSwift
   - WCDB.swift
@@ -57,6 +61,6 @@ SPEC CHECKSUMS:
   WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: a01681d15cab014d27526f08c1c057d33a1634d1
+PODFILE CHECKSUM: afabf9c4af18dfc14eb67acadd2a5366a57b1e74
 
 COCOAPODS: 1.9.3

@@ -42,6 +42,7 @@ extension Beehive {
     ///   - completion: 登录回调
     /// - Returns:
     class func login(with token:String? = nil ,id:String,completion:((AgoraRtmLoginErrorCode)->())? = nil)  {
+    
         Beehive.default.chat?.login(byToken: token, user: id, completion: completion)
     }
     
@@ -76,6 +77,8 @@ extension Beehive : AgoraRtmDelegate {
     
     func rtmKit(_ kit: AgoraRtmKit, messageReceived message: AgoraRtmMessage, fromPeer peerId: String) {
         
+        Beehive.insertOrUpdate(DBUser(peerId))
+        
 
     }
     
@@ -89,7 +92,7 @@ extension Beehive {
         return Beehive.default.hive.allUser().map { ChatMessageFactory(toUser: $0.toUser) }
     }
 
-    class func allMessage(toUser:Int) ->[Message] {
+    class func allMessage(toUser:String) ->[Message] {
 
         return Beehive.default.hive.allMessage(toUser: toUser)
     }

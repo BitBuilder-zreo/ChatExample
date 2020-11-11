@@ -54,7 +54,7 @@ extension HiveRoom {
 extension HiveRoom {
     
 
-    func allMessage(toUser:Int) ->[Message] {
+    func allMessage(toUser:String) ->[Message] {
 
         let order =  Message.Properties.identifier.asOrder(by: .descending)
 

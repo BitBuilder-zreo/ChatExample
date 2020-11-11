@@ -12,7 +12,7 @@ class Message : TableCodable {
     
     var identifier:Int64? = nil
     /// 另一个用户的ID
-    let toUser:Int
+    let toUser:String
     /// 状态 1发送中 2成功 3失败
     var status:Int
     /// 是否是发送者
@@ -34,7 +34,7 @@ class Message : TableCodable {
         }
     }
 
-    init(toUser:Int,
+    init(toUser:String,
          status:Int,
          type:Int,
          contentID:Int64? = nil,

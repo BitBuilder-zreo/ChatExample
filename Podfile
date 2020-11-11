@@ -12,4 +12,5 @@ target 'ChatExample' do
   pod 'Moya'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'Moya/RxSwift'
 end

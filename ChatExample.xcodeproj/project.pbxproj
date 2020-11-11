@@ -14,6 +14,9 @@
 		72164A94255828F100D16117 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72164A92255828F100D16117 /* Main.storyboard */; };
 		72164A96255828F200D16117 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72164A95255828F200D16117 /* Assets.xcassets */; };
 		72164A99255828F200D16117 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72164A97255828F200D16117 /* LaunchScreen.storyboard */; };
+		724D39FC255C1CD100A87728 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D39FB255C1CD100A87728 /* Api.swift */; };
+		724D3A0C255C29BD00A87728 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D3A0B255C29BD00A87728 /* Model.swift */; };
+		724D3A0F255C29D600A87728 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D3A0E255C29D600A87728 /* Response.swift */; };
 		72BF1BC325597375001C65BC /* SlidingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF1BAC25597375001C65BC /* SlidingDataSource.swift */; };
 		72BF1BC425597375001C65BC /* ChatDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF1BAD25597375001C65BC /* ChatDataSource.swift */; };
 		72BF1BC525597375001C65BC /* ChatMessageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BF1BAF25597375001C65BC /* ChatMessageFactory.swift */; };
@@ -47,6 +50,9 @@
 		72164A95255828F200D16117 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72164A98255828F200D16117 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72164A9A255828F200D16117 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		724D39FB255C1CD100A87728 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		724D3A0B255C29BD00A87728 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		724D3A0E255C29D600A87728 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		72BF1BAC25597375001C65BC /* SlidingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingDataSource.swift; sourceTree = "<group>"; };
 		72BF1BAD25597375001C65BC /* ChatDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataSource.swift; sourceTree = "<group>"; };
 		72BF1BAF25597375001C65BC /* ChatMessageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageFactory.swift; sourceTree = "<group>"; };
@@ -120,6 +126,7 @@
 		72164A8B255828F100D16117 /* ChatExample */ = {
 			isa = PBXGroup;
 			children = (
+				724D39FA255C1CC500A87728 /* Api */,
 				72164AA825582A0400D16117 /* Chat */,
 				72164A8C255828F100D16117 /* AppDelegate.swift */,
 				72164A8E255828F100D16117 /* SceneDelegate.swift */,
@@ -139,6 +146,16 @@
 				72BF1BAA25597375001C65BC /* UI */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		724D39FA255C1CC500A87728 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				724D39FB255C1CD100A87728 /* Api.swift */,
+				724D3A0B255C29BD00A87728 /* Model.swift */,
+				724D3A0E255C29D600A87728 /* Response.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		72BF1BAA25597375001C65BC /* UI */ = {
@@ -351,6 +368,7 @@
 				72164A91255828F100D16117 /* ViewController.swift in Sources */,
 				72164A8D255828F100D16117 /* AppDelegate.swift in Sources */,
 				72BF1BC625597375001C65BC /* SendingStatusModel.swift in Sources */,
+				724D39FC255C1CD100A87728 /* Api.swift in Sources */,
 				72BF1BD025597376001C65BC /* ReplyActionHandler.swift in Sources */,
 				72BF1BE42559749B001C65BC /* Beehive.swift in Sources */,
 				72BF1BCC25597375001C65BC /* BaseMessagesSelector.swift in Sources */,
@@ -360,6 +378,7 @@
 				72164A8F255828F100D16117 /* SceneDelegate.swift in Sources */,
 				72BF1BD125597376001C65BC /* SendingStatusCollectionViewCell.swift in Sources */,
 				72BF1BC925597375001C65BC /* ChatTextMessageViewModelBuilder.swift in Sources */,
+				724D3A0C255C29BD00A87728 /* Model.swift in Sources */,
 				72BF1BCD25597375001C65BC /* ChatViewController.swift in Sources */,
 				72BF1BE7255975FF001C65BC /* HiveRoom.swift in Sources */,
 				72BF1BFE25598CD0001C65BC /* DBUser.swift in Sources */,
@@ -368,6 +387,7 @@
 				72BF1BF925598378001C65BC /* Message.swift in Sources */,
 				72BF1BC325597375001C65BC /* SlidingDataSource.swift in Sources */,
 				72BF1BC425597375001C65BC /* ChatDataSource.swift in Sources */,
+				724D3A0F255C29D600A87728 /* Response.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
