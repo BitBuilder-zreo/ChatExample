@@ -11,9 +11,13 @@ import ChattoAdditions
 import WCDBSwift
 class ChatMessageFactory {
 
+    typealias MessageReceived = (MessageModelProtocol)->()?
+
     let toUser:String
 
     var items:[Message]
+
+    var received : MessageReceived?
 
     init(toUser:String) {
 
@@ -24,7 +28,7 @@ class ChatMessageFactory {
 
     func makeRandomMessage() -> [MessageModelProtocol]  {
 
-        return  items.map { self.makeRandomMessage($0) }
+        return items.map { self.makeRandomMessage($0) }
     }
 
     func makeTextMessage(_ text:String) -> ChatMessageModelProtocol  {
@@ -38,6 +42,13 @@ class ChatMessageFactory {
         let messageModel = ChatMessageFactory.makeMessageModel(message)
 
         return ChatTextMessageModel(messageModel: messageModel, text: text)
+
+    }
+
+    func update(message:Message) {
+
+        self.received?(makeRandomMessage(message))
+
 
     }
 
@@ -83,17 +94,6 @@ fileprivate extension ChatMessageFactory {
     }
 
 }
-
-
-
-extension ChatMessageFactory {
-    
-    /// update 新的消息
-    func update()  {
-        
-    }
-}
-
 
 
 extension TextMessageModel {

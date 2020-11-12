@@ -15,3 +15,11 @@ struct RTMUser : Codable {
     let u_id:String
     
 }
+
+struct MessageContent:Codable {
+
+    let type:Int
+
+    let content:String
+}
+

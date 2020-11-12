@@ -32,10 +32,8 @@ class ChatMessageSender {
     /// 发送成功 失败
     private func fakeMessageStatus(_ message: ChatMessageModelProtocol) {
         
-        
         if let model = message as? ChatTextMessageModel {
-            
-            
+
             switch message.status {
             case .success:
                 break

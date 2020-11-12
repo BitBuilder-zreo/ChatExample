@@ -42,7 +42,7 @@ extension Beehive {
     ///   - completion: 登录回调
     /// - Returns:
     class func login(with token:String? = nil ,id:String,completion:((AgoraRtmLoginErrorCode)->())? = nil)  {
-    
+
         Beehive.default.chat?.login(byToken: token, user: id, completion: completion)
     }
     
@@ -76,10 +76,37 @@ extension Beehive : AgoraRtmDelegate {
     }
     
     func rtmKit(_ kit: AgoraRtmKit, messageReceived message: AgoraRtmMessage, fromPeer peerId: String) {
-        
-        Beehive.insertOrUpdate(DBUser(peerId))
-        
 
+        guard  let data = message.text.data(using: .utf8) else { return }
+
+        Beehive.insertOrUpdate(DBUser(peerId))
+
+        if let content = try? JSONDecoder().decode(MessageContent.self, from:data)  {
+
+            let message = Message(
+                toUser: peerId,
+                status: 2,
+                type: content.type,
+                isSender: false,
+                isRead: false)
+            if content.type == 1 {
+                
+                Beehive.insert(message: message, text: content.content)
+            }
+
+
+
+            let contains = Beehive.items.last { $0.toUser == peerId }
+            if let factory = contains  {
+
+                factory.update(message: message)
+
+            }else {
+
+            }
+
+
+        }
     }
     
 }
@@ -87,9 +114,9 @@ extension Beehive : AgoraRtmDelegate {
 
 extension Beehive {
 
-    class var items:[ChatMessageFactory]{
+    static var items:[ChatMessageFactory] {
 
-        return Beehive.default.hive.allUser().map { ChatMessageFactory(toUser: $0.toUser) }
+        return  Beehive.default.hive.allUser().map { ChatMessageFactory(toUser: $0.toUser) }
     }
 
     class func allMessage(toUser:String) ->[Message] {

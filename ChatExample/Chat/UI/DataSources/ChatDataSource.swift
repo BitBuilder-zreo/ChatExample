@@ -40,6 +40,16 @@ class ChatDataSource {
         let items:[ChatItemProtocol] = factory.makeRandomMessage()
         
         self.slidingWindow = SlidingDataSource(items: items, pageSize: 50)
+
+        factory.received = { [weak self] message in
+
+            if let self = self {
+                self.slidingWindow.insertItem(message, position: .bottom)
+                self.delegate?.chatDataSourceDidUpdate(self)
+                self.delegate?.chatDataSourceDidUpdate(self)
+            }
+
+        }
     }
 }
 
