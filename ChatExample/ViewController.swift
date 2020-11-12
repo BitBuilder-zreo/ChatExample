@@ -96,6 +96,7 @@ extension ViewController : UITableViewDelegate {
         let chat = ChatViewController()
 
         chat.dataSource = ChatDataSource(factory: items[indexPath.row],pageSize: 50)
+
         chat.delegate = self
 
         navigationController?.pushViewController(chat, animated: true)
