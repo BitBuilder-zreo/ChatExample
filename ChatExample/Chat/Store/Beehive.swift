@@ -8,26 +8,35 @@
 
 import Foundation
 import AgoraRtmKit
+import AgoraRtcKit
 class Beehive : NSObject {
     
     private static let instance = Beehive()
     
     private var chat : AgoraRtmKit?
     
+    private var rtc : AgoraRtcEngineKit?
+    
     private var hive:HiveRoom!
-
+    
     private lazy var _items : [ChatMessageFactory] = {
-
+        
         return Beehive.default.hive.allUser().map { ChatMessageFactory(toUser: $0.toUser) }
     }()
-
+    
     class var `default`: Beehive{
         return instance
+    }
+    
+    class var call: AgoraRtmCallKit? {
+        
+        return Beehive.default.chat?.getRtmCall()
     }
     
     private override init() {
         super.init()
         hive = HiveRoom()
+        
     }
     
 }
@@ -38,6 +47,10 @@ extension Beehive {
     /// - Parameter appid: 声网创建的appid
     class func connection(with appid:String)  {
         Beehive.default.chat = AgoraRtmKit(appId:appid , delegate: Beehive.default)
+        Beehive.default.rtc = AgoraRtcEngineKit.sharedEngine(withAppId: appid, delegate: Beehive.default)
+        
+        call?.callDelegate = Beehive.default
+        
     }
     
     /// 用户登录
@@ -47,7 +60,7 @@ extension Beehive {
     ///   - completion: 登录回调
     /// - Returns:
     class func login(with token:String? = nil ,id:String,completion:((AgoraRtmLoginErrorCode)->())? = nil)  {
-
+        
         Beehive.default.chat?.login(byToken: token, user: id, completion: completion)
     }
     
@@ -81,13 +94,13 @@ extension Beehive : AgoraRtmDelegate {
     }
     
     func rtmKit(_ kit: AgoraRtmKit, messageReceived message: AgoraRtmMessage, fromPeer peerId: String) {
-
+        
         guard  let data = message.text.data(using: .utf8) else { return }
-
+        
         Beehive.insertOrUpdate(DBUser(peerId))
-
+        
         if let content = try? JSONDecoder().decode(MessageContent.self, from:data)  {
-
+            
             let message = Message(
                 toUser: peerId,
                 status: 2,
@@ -95,15 +108,15 @@ extension Beehive : AgoraRtmDelegate {
                 isSender: false,
                 isRead: false)
             if content.type == 1 {
-
+                
                 Beehive.insert(message: message, text: content.content)
             }
-
+            
             let contains = Beehive.items.last { $0.toUser == peerId }
             if let factory = contains  {
-
+                
                 factory.update(message: message)
-
+                
             }else {
                 Beehive.default._items.insert(ChatMessageFactory(toUser: peerId), at: 0)
             }
@@ -114,35 +127,89 @@ extension Beehive : AgoraRtmDelegate {
 
 
 extension Beehive {
-
+    
     class var items:[ChatMessageFactory] {
-
+        
         return Beehive.default._items
     }
-
+    
     class func allMessage(toUser:String) ->[Message] {
-
+        
         return Beehive.default.hive.allMessage(toUser: toUser)
     }
-
+    
     class func insertOrUpdate(_ user:DBUser) {
-
+        
         return Beehive.default.hive.insertOrUpdate(user)
     }
-
+    
     class func updateMessage(status:Int,identifier:Int64) {
-
+        
         Beehive.default.hive.updateMessage(status: status, identifier: identifier)
     }
-
+    
     class func insert(message:Message,text:String) {
-
+        
         return Beehive.default.hive.insert(message: message, text: text)
     }
-
+    
     class func makeTextRandomMessage(message:Message) -> String {
-
+        
         return Beehive.default.hive.makeTextRandomMessage(message: message)
     }
+    
+}
 
+extension Beehive : AgoraRtcEngineDelegate {
+    
+    
+}
+
+extension Beehive : AgoraRtmCallDelegate {
+    ///呼叫邀请已被取消。
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationCanceled localInvitation: AgoraRtmLocalInvitation) {
+        
+    }
+    /// 拒绝呼叫邀请成功。
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationRefused remoteInvitation: AgoraRtmRemoteInvitation) {
+        
+    }
+    /// 收到一个呼叫邀请
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationReceived remoteInvitation: AgoraRtmRemoteInvitation) {
+        
+      let xx =   UIAlertController(title: "邀请", message:"收到邀请过", preferredStyle: .alert)
+    
+        UIApplication.shared.keyWindow?.rootViewController?.present(xx, animated: true, completion: nil)
+    }
+    
+    /// 接受呼叫邀请成功。
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationAccepted remoteInvitation: AgoraRtmRemoteInvitation) {
+    }
+    
+    /// 主叫已取消呼叫邀请。
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationCanceled remoteInvitation: AgoraRtmRemoteInvitation) {
+        
+    }
+    /// 被叫已收到呼叫邀请
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationReceivedByPeer localInvitation: AgoraRtmLocalInvitation) {
+        
+    }
+    ///被叫已拒绝呼叫邀请。
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationRefused localInvitation: AgoraRtmLocalInvitation, withResponse response: String?) {
+        
+    }
+    /// 被叫已接受呼叫邀请。
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationAccepted localInvitation: AgoraRtmLocalInvitation, withResponse response: String?) {
+        
+    }
+    /// 呼叫邀请发送失败。
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationFailure localInvitation: AgoraRtmLocalInvitation, errorCode: AgoraRtmLocalInvitationErrorCode) {
+        
+    }
+    /// 来自对端的邀请失败。
+    func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationFailure remoteInvitation: AgoraRtmRemoteInvitation, errorCode: AgoraRtmRemoteInvitationErrorCode) {
+        
+    }
+    
+    
 }

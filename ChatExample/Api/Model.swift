@@ -23,3 +23,27 @@ struct MessageContent:Codable {
     let content:String
 }
 
+
+struct Conversation : Codable {
+    
+    let chat_id : Int
+    
+    let sw_token_info: Info
+    
+}
+
+extension Conversation {
+    
+    struct Info : Codable {
+        
+        let token:String
+        let u_id:Int
+        let channel_name:String        
+    }
+    
+}
+
+
+
+
+

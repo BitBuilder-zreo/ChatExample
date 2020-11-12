@@ -14,6 +14,8 @@
 		72164A94255828F100D16117 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72164A92255828F100D16117 /* Main.storyboard */; };
 		72164A96255828F200D16117 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72164A95255828F200D16117 /* Assets.xcassets */; };
 		72164A99255828F200D16117 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72164A97255828F200D16117 /* LaunchScreen.storyboard */; };
+		72270018255D723C001D2ED6 /* VideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72270017255D723C001D2ED6 /* VideoChatViewController.swift */; };
+		7227001B255D877E001D2ED6 /* VideoChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7227001A255D877E001D2ED6 /* VideoChatViewController.xib */; };
 		724D39FC255C1CD100A87728 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D39FB255C1CD100A87728 /* Api.swift */; };
 		724D3A0C255C29BD00A87728 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D3A0B255C29BD00A87728 /* Model.swift */; };
 		724D3A0F255C29D600A87728 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D3A0E255C29D600A87728 /* Response.swift */; };
@@ -51,6 +53,8 @@
 		72164A95255828F200D16117 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72164A98255828F200D16117 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72164A9A255828F200D16117 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72270017255D723C001D2ED6 /* VideoChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatViewController.swift; sourceTree = "<group>"; };
+		7227001A255D877E001D2ED6 /* VideoChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoChatViewController.xib; sourceTree = "<group>"; };
 		724D39FB255C1CD100A87728 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		724D3A0B255C29BD00A87728 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		724D3A0E255C29D600A87728 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 				72BF1BBC25597375001C65BC /* ChatItemsDecorator.swift */,
 				72BF1BBD25597375001C65BC /* ChatMessageSender.swift */,
 				72BF1BBE25597375001C65BC /* ReplyActionHandler.swift */,
+				72270017255D723C001D2ED6 /* VideoChatViewController.swift */,
+				7227001A255D877E001D2ED6 /* VideoChatViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -318,6 +324,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7227001B255D877E001D2ED6 /* VideoChatViewController.xib in Resources */,
 				72164A99255828F200D16117 /* LaunchScreen.storyboard in Resources */,
 				72164A96255828F200D16117 /* Assets.xcassets in Resources */,
 				72164A94255828F100D16117 /* Main.storyboard in Resources */,
@@ -400,6 +407,7 @@
 				72BF1BC325597375001C65BC /* SlidingDataSource.swift in Sources */,
 				72BF1BC425597375001C65BC /* ChatDataSource.swift in Sources */,
 				724D3A0F255C29D600A87728 /* Response.swift in Sources */,
+				72270018255D723C001D2ED6 /* VideoChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

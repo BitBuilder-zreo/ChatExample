@@ -12,6 +12,7 @@ import Alamofire
 enum Api {
     case token
     case send(id:String,message:Message)
+    case connect(id:String,type:String)
 }
 
 extension Api : TargetType {
@@ -21,6 +22,8 @@ extension Api : TargetType {
             return "v1/sw/getImToken"
         case .send:
             return "v1/im/sendMessage"
+        case .connect:
+            return "v1/chat/dial"
         }
     }
     
@@ -38,23 +41,25 @@ extension Api : TargetType {
             return .requestParameters(
                 parameters: ["t_u_id":id,"message":message.entity],
                 encoding: JSONEncoding.default)
+        case let .connect(id, type):
+            return .requestParameters(parameters: ["t_u_id":id,"chat_type":type], encoding:JSONEncoding.default)
         }
     }
     
     var headers: [String : String]? {
-//        /// 14
+                /// 14
+                return [
+                    "v":"1.0",
+                    "os":"iOS",
+                    "token":"TwvSDVockB7xW1Gp3wvlWlcZgGeY34AQ"
+                ]
+        
+//        /// 11
 //        return [
 //            "v":"1.0",
 //            "os":"iOS",
-//            "token":"TwvSDVockB7xW1Gp3wvlWlcZgGeY34AQ"
+//            "token":"rP023ZJt9d0NkUks5dTxkveQgAo6En1U"
 //        ]
-
-        /// 11
-        return [
-            "v":"1.0",
-            "os":"iOS",
-            "token":"rP023ZJt9d0NkUks5dTxkveQgAo6En1U"
-        ]
     }
     
     var baseURL: URL {
