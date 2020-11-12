@@ -82,9 +82,6 @@ extension Beehive : AgoraRtmDelegate {
     
     func rtmKit(_ kit: AgoraRtmKit, messageReceived message: AgoraRtmMessage, fromPeer peerId: String) {
 
-
-        print("text -> \(message.text)")
-
         guard  let data = message.text.data(using: .utf8) else { return }
 
         Beehive.insertOrUpdate(DBUser(peerId))

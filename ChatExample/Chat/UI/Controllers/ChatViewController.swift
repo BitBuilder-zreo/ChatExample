@@ -8,6 +8,14 @@
 import UIKit
 import Chatto
 import ChattoAdditions
+
+protocol AudioVisualInputDelegate : class {
+
+    func video(with toUser:String)
+
+    func audio(with toUer:String)
+}
+
 /// https://github.com/badoo/Chatto/wiki
 class ChatViewController: BaseChatViewController {
     
@@ -17,6 +25,8 @@ class ChatViewController: BaseChatViewController {
     fileprivate var messageSender: ChatMessageSender!
 
     fileprivate let messagesSelector = BaseMessagesSelector()
+
+    weak var delegate:AudioVisualInputDelegate?
     
     /// 数据源
     var dataSource:ChatDataSource!{
@@ -33,7 +43,7 @@ class ChatViewController: BaseChatViewController {
         messagesSelector.delegate = self
         chatItemsDecorator = ChatItemsDecorator(messagesSelector: messagesSelector)
         replyActionHandler = ChatReplyActionHandler(presentingViewController: self)
-      
+
     }
 
     
@@ -44,7 +54,7 @@ class ChatViewController: BaseChatViewController {
         let textMessagePresenter = TextMessagePresenterBuilder(
             viewModelBuilder: ChatTextMessageViewModelBuilder(),
             interactionHandler: ChatMessageInteractionHandler(messageSender: messageSender,
-                messagesSelector: messagesSelector)
+                                                              messagesSelector: messagesSelector)
         )
 
         textMessagePresenter.baseMessageStyle = BaseMessageCollectionViewCellAvatarStyle()
@@ -78,7 +88,7 @@ fileprivate extension ChatViewController {
     /// - Returns:
     func chatInputItems() -> [ChatInputItemProtocol] {
         
-        return [textInputItem(),photoInputItem()]
+        return [textInputItem(),photoInputItem(),videoInputItem()]
     }
     
     /// keyboard 文字输入
@@ -99,6 +109,22 @@ fileprivate extension ChatViewController {
             // Your handling code
         }
         return item
+    }
+
+    func videoInputItem() -> VideoChatInputItem {
+
+        let images:[UIControlStateWrapper:UIImage] = [UIControlStateWrapper(state: .normal):UIImage(named: "reply-indicator")!]
+
+        let video = VideoChatInputItem(buttonAppearance: TabInputButtonAppearance(images:images, size: CGSize(width: 20, height: 20)))
+
+        video.inputHandler = { [weak self] in
+
+            if let toUser = self?.dataSource.factory.toUser {
+                self?.delegate?.video(with: toUser)
+            }
+        }
+
+        return video
     }
     
 }

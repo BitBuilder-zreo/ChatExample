@@ -61,11 +61,12 @@ fileprivate extension ViewController  {
     
     @IBAction func addUser(){
 
-        let factory = ChatMessageFactory(toUser: "11")
+        let factory = ChatMessageFactory(toUser: "14")
 
         let chat = ChatViewController()
 
         chat.dataSource = ChatDataSource(factory: factory,pageSize: 50)
+        chat.delegate = self
 
         navigationController?.pushViewController(chat, animated: true)
         
@@ -95,11 +96,27 @@ extension ViewController : UITableViewDelegate {
         let chat = ChatViewController()
 
         chat.dataSource = ChatDataSource(factory: items[indexPath.row],pageSize: 50)
+        chat.delegate = self
 
         navigationController?.pushViewController(chat, animated: true)
 
     }
 }
+
+extension ViewController : AudioVisualInputDelegate {
+
+    func video(with toUser: String) {
+
+    }
+
+    func audio(with toUer: String) {
+
+    }
+
+
+}
+
+
 
 
 

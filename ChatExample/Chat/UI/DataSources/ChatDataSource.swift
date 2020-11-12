@@ -18,7 +18,7 @@ class ChatDataSource {
     
     /// 数据源代理
     weak var delegate: ChatDataSourceDelegateProtocol?
-    
+
     /// 数据滑动代理
     var slidingWindow:SlidingDataSource<ChatItemProtocol>!
     
