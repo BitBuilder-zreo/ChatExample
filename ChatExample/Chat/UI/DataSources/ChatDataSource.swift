@@ -41,14 +41,14 @@ class ChatDataSource {
         
         self.slidingWindow = SlidingDataSource(items: items, pageSize: 50)
 
-        factory.received = { [weak self] message in
+        factory.received = { [weak self] (message) in
 
-            if let self = self {
-                self.slidingWindow.insertItem(message, position: .bottom)
-                self.delegate?.chatDataSourceDidUpdate(self)
-                self.delegate?.chatDataSourceDidUpdate(self)
+            if let sSelf = self {
+
+                sSelf.slidingWindow.insertItem(message, position: .bottom)
+                sSelf.delegate?.chatDataSourceDidUpdate(sSelf)
+                sSelf.delegate?.chatDataSourceDidUpdate(sSelf)
             }
-
         }
     }
 }

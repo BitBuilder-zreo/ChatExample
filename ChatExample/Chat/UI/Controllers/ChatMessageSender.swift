@@ -46,12 +46,13 @@ class ChatMessageSender {
                 let provider:MoyaProvider<Api> = MoyaProvider()
                 
                 provider.rx.request(.send(id: message.senderId, message: text)).subscribe { (response) in
-                    
+
                     self.updateMessage(message, status: .success)
-                    
+                    Beehive.updateMessage(status: 2, identifier: Int64(model.uid) ?? 0)
                 } onError: { (error) in
                     
                     self.updateMessage(message, status: .failed)
+                    Beehive.updateMessage(status: 3, identifier: Int64(model.uid) ?? 0)
                 }.disposed(by: bag)
                 
             }
@@ -62,6 +63,8 @@ class ChatMessageSender {
         if message.status != status {
             message.status = status
             self.notifyMessageChanged(message)
+            
+
         }
     }
     

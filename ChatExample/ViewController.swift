@@ -41,8 +41,6 @@ class ViewController: UIViewController {
                 
             }.disposed(by: bag)
 
-        
-    
         // Do any additional setup after loading the view.
     }
 
@@ -53,7 +51,7 @@ fileprivate extension ViewController  {
    // http://showdoc.yangxiushan.top/web/#/15?page_id=227
     
     func login(user:RTMUser) {
-        
+        title = user.u_id
         /// 登录
         Beehive.login(
             with:user.token,
@@ -63,7 +61,7 @@ fileprivate extension ViewController  {
     
     @IBAction func addUser(){
 
-        let factory = ChatMessageFactory(toUser: "14")
+        let factory = ChatMessageFactory(toUser: "11")
 
         let chat = ChatViewController()
 

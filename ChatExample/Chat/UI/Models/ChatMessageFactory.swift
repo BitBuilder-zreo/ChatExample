@@ -11,7 +11,7 @@ import ChattoAdditions
 import WCDBSwift
 class ChatMessageFactory {
 
-    typealias MessageReceived = (MessageModelProtocol)->()?
+    typealias MessageReceived = (MessageModelProtocol)->()
 
     let toUser:String
 
@@ -48,8 +48,6 @@ class ChatMessageFactory {
     func update(message:Message) {
 
         self.received?(makeRandomMessage(message))
-
-
     }
 
 }

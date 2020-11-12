@@ -16,6 +16,11 @@ class Beehive : NSObject {
     
     private var hive:HiveRoom!
 
+    private lazy var _items : [ChatMessageFactory] = {
+
+        return Beehive.default.hive.allUser().map { ChatMessageFactory(toUser: $0.toUser) }
+    }()
+
     class var `default`: Beehive{
         return instance
     }
@@ -77,6 +82,9 @@ extension Beehive : AgoraRtmDelegate {
     
     func rtmKit(_ kit: AgoraRtmKit, messageReceived message: AgoraRtmMessage, fromPeer peerId: String) {
 
+
+        print("text -> \(message.text)")
+
         guard  let data = message.text.data(using: .utf8) else { return }
 
         Beehive.insertOrUpdate(DBUser(peerId))
@@ -90,11 +98,9 @@ extension Beehive : AgoraRtmDelegate {
                 isSender: false,
                 isRead: false)
             if content.type == 1 {
-                
+
                 Beehive.insert(message: message, text: content.content)
             }
-
-
 
             let contains = Beehive.items.last { $0.toUser == peerId }
             if let factory = contains  {
@@ -102,10 +108,8 @@ extension Beehive : AgoraRtmDelegate {
                 factory.update(message: message)
 
             }else {
-
+                Beehive.default._items.insert(ChatMessageFactory(toUser: peerId), at: 0)
             }
-
-
         }
     }
     
@@ -114,9 +118,9 @@ extension Beehive : AgoraRtmDelegate {
 
 extension Beehive {
 
-    static var items:[ChatMessageFactory] {
+    class var items:[ChatMessageFactory] {
 
-        return  Beehive.default.hive.allUser().map { ChatMessageFactory(toUser: $0.toUser) }
+        return Beehive.default._items
     }
 
     class func allMessage(toUser:String) ->[Message] {
@@ -127,6 +131,11 @@ extension Beehive {
     class func insertOrUpdate(_ user:DBUser) {
 
         return Beehive.default.hive.insertOrUpdate(user)
+    }
+
+    class func updateMessage(status:Int,identifier:Int64) {
+
+        Beehive.default.hive.updateMessage(status: status, identifier: identifier)
     }
 
     class func insert(message:Message,text:String) {

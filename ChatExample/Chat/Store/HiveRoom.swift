@@ -79,6 +79,18 @@ extension HiveRoom {
         try? database.insert(objects: message, intoTable: "Message")
     }
 
+    func updateMessage(status:Int,identifier:Int64){
+        print("status ->\(status),identifier ->\(identifier)")
+        let message = Message(toUser: "1", status: status, type: 1)
+
+        try? database.update(
+            table: "Message",
+            on: [Message.Properties.status],
+            with: message,
+            where: Message.Properties.identifier == identifier)
+
+    }
+
     func makeTextRandomMessage(message:Message) -> String {
         
         guard let conetentID = message.contentID else { return "" }
