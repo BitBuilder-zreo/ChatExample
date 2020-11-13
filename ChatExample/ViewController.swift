@@ -68,36 +68,41 @@ fileprivate extension ViewController  {
     
     
     @IBAction func addUser(){
+        
+     
 
-        let provider:MoyaProvider<Api> = MoyaProvider()
+        let invitation = AgoraRtmLocalInvitation(calleeId: "11")
+        invitation.channelId = "1"
 
-        provider.rx.request(.connect(id: "11", type:"1")).filterSuccessfulStatusCodes().map(Respose<Conversation>.self).subscribe { [weak self](response) in
+        let input = VideoChatViewController.Input(
+            token: "",
+            uid: "33",
+            nickname: "小王",
+            avatar:"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI2ypuOuCibDFf8xy6ktq5wZM2iamlkibbib0tv78hoicbdL7XsZMXasiaRvTApuzvHGo64qZcCiavicTiaoyw/132",
+            channel: "1",
+            isSender:true)
 
-            let data = response.data?.sw_token_info
+        Beehive.call?.send(invitation, completion: { [weak self](code) in
 
-            let invitation = AgoraRtmLocalInvitation(calleeId: "11")
-            invitation.channelId = data?.channel_name ?? ""
+            let video = VideoChatViewController(input)
 
-            let input = VideoChatViewController.Input(
-                token: data?.token ?? "",
-                uid: "11",
-                nickname: "小王",
-                avatar:"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI2ypuOuCibDFf8xy6ktq5wZM2iamlkibbib0tv78hoicbdL7XsZMXasiaRvTApuzvHGo64qZcCiavicTiaoyw/132",
-                channel: data?.channel_name ?? "",
-                isSender:true)
+            video.invitation = invitation
 
-            Beehive.call?.send(invitation, completion: { (code) in
+            self?.navigationController?.present(video, animated: true, completion: nil)
+        })
+        
+        
+        
 
-                let video = VideoChatViewController(input)
-
-                video.invitation = invitation
-
-                self?.navigationController?.present(video, animated: true, completion: nil)
-            })
-
-        } onError: { (error) in
-            print(error)
-        }.disposed(by: bag)
+//        let provider:MoyaProvider<Api> = MoyaProvider()
+//
+//        provider.rx.request(.connect(id: "11", type:"1")).filterSuccessfulStatusCodes().map(Respose<Conversation>.self).subscribe { [weak self](response) in
+//
+//
+//
+//        } onError: { (error) in
+//            print(error)
+//        }.disposed(by: bag)
 
 
 
@@ -185,10 +190,10 @@ extension ViewController : AudioVisualInputDelegate {
 
             let input = VideoChatViewController.Input(
                 token: data?.sw_token_info.token ?? "",
-                uid: String(data?.sw_token_info.u_id ?? 0),
+                uid: "11",
                 nickname: data?.t_u_info.nickname ?? "",
                 avatar: data?.t_u_info.portrait ?? "",
-                channel: invitation.channelId ?? "",
+                channel: "1",
                 isSender: false)
 
 

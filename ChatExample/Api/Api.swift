@@ -68,12 +68,12 @@ extension Api : TargetType {
     }
     
     var headers: [String : String]? {
-        //                /// 14
-        //                return [
-        //                    "v":"1.0",
-        //                    "os":"iOS",
-        //                    "token":"1yry0vKYODGi0WwFy685pQTnssJGrmcF"
-        //                ]
+        /// 14
+        return [
+            "v":"1.0",
+            "os":"iOS",
+            "token":"1yry0vKYODGi0WwFy685pQTnssJGrmcF"
+        ]
         
         /// 11
         return [

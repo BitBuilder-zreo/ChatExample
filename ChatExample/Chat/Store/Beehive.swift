@@ -176,45 +176,61 @@ extension Beehive : AgoraRtmCallDelegate {
 
     /// 收到一个呼叫邀请
     func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationReceived remoteInvitation: AgoraRtmRemoteInvitation) {
-
+print("111")
         NotificationCenter.default.post(Notification(name: .CallRequest, object: remoteInvitation))
     }
 
     /// 接受呼叫邀请成功。
     func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationAccepted remoteInvitation: AgoraRtmRemoteInvitation) {
+        print("222")
+
         NotificationCenter.default.post(Notification(name: .CallStart))
     }
 
     /// 拒绝呼叫邀请成功。
     func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationRefused remoteInvitation: AgoraRtmRemoteInvitation) {
+        print("333")
+
         NotificationCenter.default.post(Notification(name: .CallCancel))
     }
 
     ///呼叫邀请已被取消。
     func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationCanceled localInvitation: AgoraRtmLocalInvitation) {
+        print("444")
+
         NotificationCenter.default.post(Notification(name: .CallCancel))
     }
 
     /// 主叫已取消呼叫邀请。
     func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationCanceled remoteInvitation: AgoraRtmRemoteInvitation) {
+        print("555")
+
         NotificationCenter.default.post(Notification(name: .CallCancel))
     }
 
     ///被叫已拒绝呼叫邀请。
     func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationRefused localInvitation: AgoraRtmLocalInvitation, withResponse response: String?) {
+        print("666")
+
         NotificationCenter.default.post(Notification(name: .CallCancel))
     }
     /// 被叫已接受呼叫邀请。
     func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationAccepted localInvitation: AgoraRtmLocalInvitation, withResponse response: String?) {
+        print("777")
+
         NotificationCenter.default.post(Notification(name: .CallStart))
     }
     /// 呼叫邀请发送失败。
     func rtmCallKit(_ callKit: AgoraRtmCallKit, localInvitationFailure localInvitation: AgoraRtmLocalInvitation, errorCode: AgoraRtmLocalInvitationErrorCode) {
         NotificationCenter.default.post(Notification(name: .CallError))
+        print("888")
+
     }
     /// 来自对端的邀请失败。
     func rtmCallKit(_ callKit: AgoraRtmCallKit, remoteInvitationFailure remoteInvitation: AgoraRtmRemoteInvitation, errorCode: AgoraRtmRemoteInvitationErrorCode) {
         NotificationCenter.default.post(Notification(name: .CallError))
+        print("999")
+
     }
     
     

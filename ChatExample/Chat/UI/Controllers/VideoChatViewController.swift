@@ -49,7 +49,7 @@ class VideoChatViewController: UIViewController {
     }
     init(_ input:Input) {
         self.input = input
-        self.rtc = AgoraRtcEngineKit.sharedEngine(withAppId: "fd8b88f4213e4b0a81a00e01cf4abf17", delegate:nil)
+        self.rtc = AgoraRtcEngineKit.sharedEngine(withAppId: "73328cd178034126a7274b0202c58163", delegate:nil)
         super.init(nibName: nil, bundle: nil)
 
         modalPresentationStyle = .custom
@@ -83,6 +83,7 @@ fileprivate extension VideoChatViewController {
         callAnswering.superview?.isHidden = input.isSender
         mute.superview?.isHidden = !input.isSender
         amplifySound.superview?.isHidden = !input.isSender
+        
         rtc.setClientRole(.broadcaster)
 
         let videoCanvas = AgoraRtcVideoCanvas()
@@ -91,7 +92,7 @@ fileprivate extension VideoChatViewController {
         videoCanvas.renderMode = .hidden
         // 设置本地视图。
         rtc.setupLocalVideo(videoCanvas)
-
+        
     }
 
     func setNotification() {
@@ -122,10 +123,15 @@ fileprivate extension VideoChatViewController {
 
     @objc func enableSDK() {
 
-        rtc.joinChannel(byUserAccount: input.uid, token: input.token, channelId: input.channel) { (channelID, uid, elapsed) in
-
+//        rtc.joinChannel(byUserAccount: input.uid, token: input.token, channelId: input.channel) { (channelID, uid, elapsed) in
+//            print(channelID,uid,elapsed)
+//        }
+        rtc.joinChannel(byUserAccount:input.uid, token: nil, channelId: input.channel) { (channelID, uid, elapsed) in
+            
         }
+        
         rtc.enableVideo()
+        
         rtc.enableAudio()
 
         callAnswering.superview?.isHidden = true
@@ -204,7 +210,6 @@ extension VideoChatViewController {
     @IBAction func decline(){
 
         guard isConnected == false else {
-
 
             let provider:MoyaProvider<Api> = MoyaProvider()
 
