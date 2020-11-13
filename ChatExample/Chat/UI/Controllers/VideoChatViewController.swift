@@ -49,7 +49,7 @@ class VideoChatViewController: UIViewController {
     }
     init(_ input:Input) {
         self.input = input
-        self.rtc = AgoraRtcEngineKit.sharedEngine(withAppId: "73328cd178034126a7274b0202c58163", delegate:nil)
+        self.rtc = AgoraRtcEngineKit.sharedEngine(withAppId: "5b29d2e35ebb49d28cd94d594e738892", delegate:nil)
         super.init(nibName: nil, bundle: nil)
 
         modalPresentationStyle = .custom
@@ -85,7 +85,8 @@ fileprivate extension VideoChatViewController {
         amplifySound.superview?.isHidden = !input.isSender
         
         rtc.setClientRole(.broadcaster)
-
+        rtc.switchCamera()
+            
         let videoCanvas = AgoraRtcVideoCanvas()
         videoCanvas.uid = 0
         videoCanvas.view = localVideo
@@ -198,7 +199,7 @@ extension VideoChatViewController {
 
         if let remoteInvitation = remoteInvitation  {
             Beehive.call?.accept(remoteInvitation, completion: { (code) in
-
+                self.enableSDK()
             })
         }
 
