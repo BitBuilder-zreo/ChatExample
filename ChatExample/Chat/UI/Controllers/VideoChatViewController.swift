@@ -14,8 +14,6 @@ import Moya
 import RxSwift
 
 
-
-
 class VideoChatViewController: UIViewController {
     
     fileprivate let input:Input
@@ -36,12 +34,10 @@ class VideoChatViewController: UIViewController {
     @IBOutlet weak var mute:UIButton!
     @IBOutlet weak var amplifySound:UIButton!
 
-    var invitation:AgoraRtmLocalInvitation?
-
-    var remoteInvitation:AgoraRtmRemoteInvitation?
+    var sender:VideoChatSender!
+    
 
     let bag = DisposeBag()
-
 
     var isConnected = false
 

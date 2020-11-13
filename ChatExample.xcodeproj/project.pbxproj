@@ -16,6 +16,7 @@
 		72164A99255828F200D16117 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72164A97255828F200D16117 /* LaunchScreen.storyboard */; };
 		72270018255D723C001D2ED6 /* VideoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72270017255D723C001D2ED6 /* VideoChatViewController.swift */; };
 		7227001B255D877E001D2ED6 /* VideoChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7227001A255D877E001D2ED6 /* VideoChatViewController.xib */; };
+		7233ECD0255EA85200A3494C /* VideoChatSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7233ECCF255EA85200A3494C /* VideoChatSender.swift */; };
 		724D39FC255C1CD100A87728 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D39FB255C1CD100A87728 /* Api.swift */; };
 		724D3A0C255C29BD00A87728 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D3A0B255C29BD00A87728 /* Model.swift */; };
 		724D3A0F255C29D600A87728 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724D3A0E255C29D600A87728 /* Response.swift */; };
@@ -55,6 +56,7 @@
 		72164A9A255828F200D16117 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72270017255D723C001D2ED6 /* VideoChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatViewController.swift; sourceTree = "<group>"; };
 		7227001A255D877E001D2ED6 /* VideoChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoChatViewController.xib; sourceTree = "<group>"; };
+		7233ECCF255EA85200A3494C /* VideoChatSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoChatSender.swift; sourceTree = "<group>"; };
 		724D39FB255C1CD100A87728 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		724D3A0B255C29BD00A87728 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		724D3A0E255C29D600A87728 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				72BF1BBD25597375001C65BC /* ChatMessageSender.swift */,
 				72BF1BBE25597375001C65BC /* ReplyActionHandler.swift */,
 				72270017255D723C001D2ED6 /* VideoChatViewController.swift */,
+				7233ECCF255EA85200A3494C /* VideoChatSender.swift */,
 				7227001A255D877E001D2ED6 /* VideoChatViewController.xib */,
 			);
 			path = Controllers;
@@ -401,6 +404,7 @@
 				72BF1BCD25597375001C65BC /* ChatViewController.swift in Sources */,
 				72BF1BE7255975FF001C65BC /* HiveRoom.swift in Sources */,
 				72BF1BFE25598CD0001C65BC /* DBUser.swift in Sources */,
+				7233ECD0255EA85200A3494C /* VideoChatSender.swift in Sources */,
 				72BF1BCE25597376001C65BC /* ChatItemsDecorator.swift in Sources */,
 				72BF1BCA25597375001C65BC /* BaseMessageCollectionViewCellAvatarStyle.swift in Sources */,
 				72BF1BF925598378001C65BC /* Message.swift in Sources */,
