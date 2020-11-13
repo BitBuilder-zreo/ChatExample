@@ -75,7 +75,7 @@ fileprivate extension ViewController  {
 
             let data = response.data?.sw_token_info
 
-            let invitation = AgoraRtmLocalInvitation(calleeId: "14")
+            let invitation = AgoraRtmLocalInvitation(calleeId: "11")
             invitation.channelId = data?.channel_name ?? ""
 
             let input = VideoChatViewController.Input(
@@ -84,8 +84,7 @@ fileprivate extension ViewController  {
                 nickname: "小王",
                 avatar:"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI2ypuOuCibDFf8xy6ktq5wZM2iamlkibbib0tv78hoicbdL7XsZMXasiaRvTApuzvHGo64qZcCiavicTiaoyw/132",
                 channel: data?.channel_name ?? "",
-                isSender:false)
-
+                isSender:true)
 
             Beehive.call?.send(invitation, completion: { (code) in
 
