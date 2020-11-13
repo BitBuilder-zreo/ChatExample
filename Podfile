@@ -14,6 +14,7 @@ target 'ChatExample' do
   pod 'RxCocoa'
   pod 'Moya/RxSwift'
   pod 'AgoraRtcEngine_iOS'
+  pod 'Kingfisher'
   
   
 end

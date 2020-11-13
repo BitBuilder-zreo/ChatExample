@@ -42,6 +42,11 @@ class ViewController: UIViewController {
             } onError: { (error) in
                 
             }.disposed(by: bag)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(receiveRemote(notification:)),
+            name:.CallRequest, object: nil)
         
         // Do any additional setup after loading the view.
     }
@@ -63,15 +68,49 @@ fileprivate extension ViewController  {
     
     
     @IBAction func addUser(){
+
+        let provider:MoyaProvider<Api> = MoyaProvider()
+
+        provider.rx.request(.connect(id: "11", type:"1")).filterSuccessfulStatusCodes().map(Respose<Conversation>.self).subscribe { [weak self](response) in
+
+            let data = response.data?.sw_token_info
+
+            let invitation = AgoraRtmLocalInvitation(calleeId: "14")
+            invitation.channelId = data?.channel_name ?? ""
+
+            let input = VideoChatViewController.Input(
+                token: data?.token ?? "",
+                uid: "11",
+                nickname: "小王",
+                avatar:"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI2ypuOuCibDFf8xy6ktq5wZM2iamlkibbib0tv78hoicbdL7XsZMXasiaRvTApuzvHGo64qZcCiavicTiaoyw/132",
+                channel: data?.channel_name ?? "",
+                isSender:false)
+
+
+            Beehive.call?.send(invitation, completion: { (code) in
+
+                let video = VideoChatViewController(input)
+
+                video.invitation = invitation
+
+                self?.navigationController?.present(video, animated: true, completion: nil)
+            })
+
+        } onError: { (error) in
+            print(error)
+        }.disposed(by: bag)
+
+
+
         
-        let factory = ChatMessageFactory(toUser: "14")
-        
-        let chat = ChatViewController()
-        
-        chat.dataSource = ChatDataSource(factory: factory,pageSize: 50)
-        chat.delegate = self
-        
-        navigationController?.pushViewController(chat, animated: true)
+        //        let factory = ChatMessageFactory(toUser: "14")
+        //
+        //        let chat = ChatViewController()
+        //
+        //        chat.dataSource = ChatDataSource(factory: factory,pageSize: 50)
+        //        chat.delegate = self
+        //
+        //        navigationController?.pushViewController(chat, animated: true)
         
     }
     
@@ -114,26 +153,15 @@ extension ViewController : UITableViewDelegate {
 extension ViewController : AudioVisualInputDelegate {
     
     func video(with toUser: String) {
-        
-        
-        
+
         let provider:MoyaProvider<Api> = MoyaProvider()
         
         provider.rx.request(.connect(id: toUser, type:"1")).filterSuccessfulStatusCodes().map(Respose<Conversation>.self).subscribe { [weak self](response) in
             
-            if let data = response.data  {
-                
-                let video = VideoChatViewController(
-                    toUser,
-                    chatID:data.chat_id,
-                    token: data.sw_token_info.token,
-                    uid: data.sw_token_info.u_id)
-                
-                self?.navigationController?.present(video, animated: true, completion: nil)
-            }
+            print(response)
             
         } onError: { (error) in
-            
+            print(error)
         }.disposed(by: bag)
         
     }
@@ -142,7 +170,42 @@ extension ViewController : AudioVisualInputDelegate {
         
     }
     
-    
+    @objc func receiveRemote(notification:Notification){
+
+        guard let invitation = notification.object as? AgoraRtmRemoteInvitation  else { return }
+
+
+        //
+
+        let provider:MoyaProvider<Api> = MoyaProvider()
+
+        provider.rx.request(.rtc(id: invitation.channelId ?? "")).filterSuccessfulStatusCodes().map(Respose<Conversation1>.self).subscribe { (response) in
+
+            let data = response.data
+
+
+            let input = VideoChatViewController.Input(
+                token: data?.sw_token_info.token ?? "",
+                uid: String(data?.sw_token_info.u_id ?? 0),
+                nickname: data?.t_u_info.nickname ?? "",
+                avatar: data?.t_u_info.portrait ?? "",
+                channel: invitation.channelId ?? "",
+                isSender: false)
+
+
+            let video = VideoChatViewController(input)
+
+            video.remoteInvitation = invitation
+
+            self.navigationController?.present(video, animated: true, completion: nil)
+
+        } onError: { (error) in
+
+        }.disposed(by: bag)
+
+
+
+    }
 }
 
 

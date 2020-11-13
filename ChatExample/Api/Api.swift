@@ -13,6 +13,11 @@ enum Api {
     case token
     case send(id:String,message:Message)
     case connect(id:String,type:String)
+    case rtc(id:String)
+    case answer(id:String)
+    case chatToken(id:String)
+    case hangUp(id:String)
+    case end(id:String)
 }
 
 extension Api : TargetType {
@@ -22,8 +27,18 @@ extension Api : TargetType {
             return "v1/sw/getImToken"
         case .send:
             return "v1/im/sendMessage"
+        case .rtc:
+            return "v1/sw/getChatToken"
         case .connect:
             return "v1/chat/dial"
+        case .answer:
+            return "/v1/chat/answer"
+        case .chatToken:
+            return "v1/sw/getChatToken"
+        case .hangUp:
+            return "v1/chat/hangUp"
+        case .end:
+            return "v1/chat/end"
         }
     }
     
@@ -43,23 +58,29 @@ extension Api : TargetType {
                 encoding: JSONEncoding.default)
         case let .connect(id, type):
             return .requestParameters(parameters: ["t_u_id":id,"chat_type":type], encoding:JSONEncoding.default)
+        case let .answer(id),
+             let .chatToken(id),
+             let .hangUp(id),
+             let .end(id),
+             let .rtc(id):
+            return .requestParameters(parameters: ["chat_id":id], encoding: JSONEncoding.default)
         }
     }
     
     var headers: [String : String]? {
-                /// 14
-                return [
-                    "v":"1.0",
-                    "os":"iOS",
-                    "token":"TwvSDVockB7xW1Gp3wvlWlcZgGeY34AQ"
-                ]
+        //                /// 14
+        //                return [
+        //                    "v":"1.0",
+        //                    "os":"iOS",
+        //                    "token":"1yry0vKYODGi0WwFy685pQTnssJGrmcF"
+        //                ]
         
-//        /// 11
-//        return [
-//            "v":"1.0",
-//            "os":"iOS",
-//            "token":"rP023ZJt9d0NkUks5dTxkveQgAo6En1U"
-//        ]
+        /// 11
+        return [
+            "v":"1.0",
+            "os":"iOS",
+            "token":"rP023ZJt9d0NkUks5dTxkveQgAo6En1U"
+        ]
     }
     
     var baseURL: URL {

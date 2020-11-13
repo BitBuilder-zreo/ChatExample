@@ -32,6 +32,13 @@ struct Conversation : Codable {
     
 }
 
+struct Conversation1 : Codable {
+
+    let sw_token_info: Conversation.Info
+    let t_u_info:User
+}
+
+
 extension Conversation {
     
     struct Info : Codable {
@@ -41,6 +48,16 @@ extension Conversation {
         let channel_name:String        
     }
     
+}
+
+extension Conversation1 {
+
+    struct User : Codable {
+
+        let portrait:String
+        let nickname:String
+    }
+
 }
 
 

@@ -5,6 +5,9 @@ PODS:
   - Chatto (4.0.0)
   - ChattoAdditions (4.0.0):
     - Chatto (= 4.0.0)
+  - Kingfisher (5.15.7):
+    - Kingfisher/Core (= 5.15.7)
+  - Kingfisher/Core (5.15.7)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
@@ -30,6 +33,7 @@ DEPENDENCIES:
   - AgoraRtm_iOS
   - Chatto
   - ChattoAdditions
+  - Kingfisher
   - Moya
   - Moya/RxSwift
   - RxCocoa
@@ -43,6 +47,7 @@ SPEC REPOS:
     - Alamofire
     - Chatto
     - ChattoAdditions
+    - Kingfisher
     - Moya
     - RxCocoa
     - RxRelay
@@ -57,6 +62,7 @@ SPEC CHECKSUMS:
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Chatto: 970c3546b01acdca60a7ba6de13cc73f62341fa7
   ChattoAdditions: a8489889474f2a5bd2055089caeebf663cba34e3
+  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
@@ -65,6 +71,6 @@ SPEC CHECKSUMS:
   WCDB.swift: 05d509d7a0e60fb6e11c34eb7e4027c0fab5849f
   WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
 
-PODFILE CHECKSUM: dc74d3f0de8fbf535e7d69d1057b5068e5a46ab3
+PODFILE CHECKSUM: cbe84f4776630c7f62524c9d8a7abfb61024ae2c
 
 COCOAPODS: 1.9.3
